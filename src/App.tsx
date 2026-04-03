@@ -9,12 +9,14 @@ import { Linkedin, Calendar, MessageCircle } from "lucide-react";
 
 declare global {
   interface Window {
+    hsConversationsOnReady?: Array<() => void>;
     HubSpotConversations?: {
       widget: {
         load: (options?: { widgetOpen: boolean }) => void;
         open: () => void;
         status: () => { loaded: boolean; status: string };
       };
+      on: (eventName: string, callback: () => void) => void;
     };
   }
 }
@@ -32,16 +34,35 @@ export default function App() {
   }, []);
 
   const handleChatClick = () => {
-    if (window.HubSpotConversations && window.HubSpotConversations.widget) {
-      const status = window.HubSpotConversations.widget.status();
-      if (status.loaded) {
-        window.HubSpotConversations.widget.open();
-      } else {
-        window.HubSpotConversations.widget.load({ widgetOpen: true });
+    const openWidget = () => {
+      if (window.HubSpotConversations && window.HubSpotConversations.widget) {
+        const status = window.HubSpotConversations.widget.status();
+        if (status.loaded) {
+          window.HubSpotConversations.widget.open();
+        } else {
+          // Listen for the widget to finish loading, then open it immediately
+          window.HubSpotConversations.on('widgetLoaded', () => {
+            window.HubSpotConversations?.widget.open();
+          });
+          window.HubSpotConversations.widget.load({ widgetOpen: true });
+        }
       }
+    };
+
+    if (window.HubSpotConversations) {
+      openWidget();
     } else {
-      console.warn("HubSpot Conversations widget is not available yet.");
-      alert("The chat widget is still loading or might be blocked by an adblocker. Please disable adblockers and try again.");
+      // If the script hasn't fully initialized yet, queue it up
+      window.hsConversationsOnReady = window.hsConversationsOnReady || [];
+      window.hsConversationsOnReady.push(openWidget);
+
+      // Fallback alert if it takes too long (e.g. blocked)
+      setTimeout(() => {
+        if (!window.HubSpotConversations) {
+          console.warn("HubSpot Conversations widget is not available yet.");
+          alert("The chat widget is still loading or might be blocked by an adblocker. Please disable adblockers and try again.");
+        }
+      }, 3000);
     }
   };
 
