@@ -14,14 +14,41 @@ declare global {
       widget: {
         load: (options?: { widgetOpen: boolean }) => void;
         open: () => void;
+        remove: () => void;
         status: () => { loaded: boolean; status: string };
       };
-      on: (eventName: string, callback: () => void) => void;
+      on: (eventName: string, callback: (payload?: any) => void) => void;
     };
   }
 }
 
 export default function App() {
+  useEffect(() => {
+    const setupHubSpotListeners = () => {
+      if (window.HubSpotConversations) {
+        const resetThemeAndRemove = () => {
+          // Reset theme color to white
+          const metaTheme = document.querySelector('meta[name="theme-color"]');
+          if (metaTheme) {
+            metaTheme.setAttribute("content", "#FFFFFF");
+          }
+          // Remove the widget (hides the small circle)
+          window.HubSpotConversations?.widget.remove();
+        };
+
+        window.HubSpotConversations.on('conversationClosed', resetThemeAndRemove);
+        window.HubSpotConversations.on('conversationCollapsed', resetThemeAndRemove);
+      }
+    };
+
+    if (window.HubSpotConversations) {
+      setupHubSpotListeners();
+    } else {
+      window.hsConversationsOnReady = window.hsConversationsOnReady || [];
+      window.hsConversationsOnReady.push(setupHubSpotListeners);
+    }
+  }, []);
+
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "45min" });
