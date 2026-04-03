@@ -10,6 +10,7 @@ import { Linkedin, Calendar, MessageCircle } from "lucide-react";
 declare global {
   interface Window {
     hsConversationsOnReady?: Array<() => void>;
+    hsWidgetLoadedListenerAdded?: boolean;
     HubSpotConversations?: {
       widget: {
         load: (options?: { widgetOpen: boolean }) => void;
@@ -24,20 +25,28 @@ declare global {
 
 export default function App() {
   useEffect(() => {
+    const resetThemeAndRemove = () => {
+      // Reset theme color to white
+      let metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        metaTheme.setAttribute("content", "#FFFFFF");
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = "theme-color";
+        meta.content = "#FFFFFF";
+        document.head.appendChild(meta);
+      }
+      // Remove the widget (hides the small circle)
+      if (window.HubSpotConversations && window.HubSpotConversations.widget) {
+        window.HubSpotConversations.widget.remove();
+      }
+    };
+
     const setupHubSpotListeners = () => {
       if (window.HubSpotConversations) {
-        const resetThemeAndRemove = () => {
-          // Reset theme color to white
-          const metaTheme = document.querySelector('meta[name="theme-color"]');
-          if (metaTheme) {
-            metaTheme.setAttribute("content", "#FFFFFF");
-          }
-          // Remove the widget (hides the small circle)
-          window.HubSpotConversations?.widget.remove();
-        };
-
         window.HubSpotConversations.on('conversationClosed', resetThemeAndRemove);
-        window.HubSpotConversations.on('conversationCollapsed', resetThemeAndRemove);
+        // Some versions of the widget use this undocumented event
+        window.HubSpotConversations.on('widgetClosed', resetThemeAndRemove);
       }
     };
 
@@ -47,6 +56,42 @@ export default function App() {
       window.hsConversationsOnReady = window.hsConversationsOnReady || [];
       window.hsConversationsOnReady.push(setupHubSpotListeners);
     }
+
+    // Fallback: MutationObserver to detect when the widget is minimized by the user
+    // Since HubSpot doesn't reliably fire an event when the UI is just minimized
+    let isWidgetOpen = false;
+    const observer = new MutationObserver(() => {
+      const container = document.getElementById('hubspot-messages-iframe-container');
+      if (container) {
+        const height = container.clientHeight;
+        const width = container.clientWidth;
+        
+        // If it's large, it's open
+        if (height > 200 && width > 200) {
+          isWidgetOpen = true;
+        } 
+        // If it's small (launcher size) but was previously open, it was closed by the user
+        else if (isWidgetOpen && height >= 0 && height < 150 && width >= 0 && width < 150) {
+          isWidgetOpen = false;
+          resetThemeAndRemove();
+        }
+      } else {
+        // Container doesn't exist. If it was open, it's now closed
+        if (isWidgetOpen) {
+          isWidgetOpen = false;
+          resetThemeAndRemove();
+        }
+      }
+    });
+
+    observer.observe(document.body, { 
+      childList: true, 
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -73,9 +118,12 @@ export default function App() {
           window.HubSpotConversations.widget.open();
         } else {
           // Listen for the widget to finish loading, then open it immediately
-          window.HubSpotConversations.on('widgetLoaded', () => {
-            window.HubSpotConversations?.widget.open();
-          });
+          if (!window.hsWidgetLoadedListenerAdded) {
+            window.HubSpotConversations.on('widgetLoaded', () => {
+              window.HubSpotConversations?.widget.open();
+            });
+            window.hsWidgetLoadedListenerAdded = true;
+          }
           window.HubSpotConversations.widget.load({ widgetOpen: true });
         }
       }
