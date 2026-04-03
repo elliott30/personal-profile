@@ -36,6 +36,12 @@
     -webkit-tap-highlight-color: transparent;
     outline: none;
     transition: transform 0.1s ease, background-color 0.1s ease;
+    /* Prevent text selection and context menu on mobile */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
   }
 
   .tactile-btn:active {
