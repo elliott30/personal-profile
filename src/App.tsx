@@ -25,11 +25,15 @@ export default function App() {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "45min" });
+      cal("init", { origin: "https://cal.eu" });
       cal("ui", {
-        origin: "https://cal.eu",
         cssVarsPerTheme: { light: { "cal-brand": "#00F5FF" } },
         hideEventTypeDetails: true,
         layout: "month_view",
+      });
+      // Prerender the booking page in the background for instant loading on click
+      cal("prerender", {
+        calLink: "elliott-chapman/45min",
       });
     })();
   }, []);
@@ -103,6 +107,7 @@ export default function App() {
           <button
             data-cal-namespace="45min"
             data-cal-link="elliott-chapman/45min"
+            data-cal-origin="https://cal.eu"
             data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
             className="group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
           >
