@@ -26,8 +26,9 @@ export default function App() {
     (async function () {
       const cal = await getCalApi({ namespace: "45min" });
       cal("ui", {
+        origin: "https://cal.eu",
         cssVarsPerTheme: { light: { "cal-brand": "#00F5FF" } },
-        hideEventTypeDetails: false,
+        hideEventTypeDetails: true,
         layout: "month_view",
       });
     })();
