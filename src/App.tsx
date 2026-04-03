@@ -147,8 +147,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 font-sans text-gray-900">
-      <div className="w-full max-w-md flex flex-col items-center space-y-8">
+    <div className="min-h-[100dvh] bg-white flex flex-col items-center justify-center p-6 font-sans text-gray-900">
+      <div className="w-full max-w-md flex flex-col items-center space-y-6 sm:space-y-8">
         
         {/* Profile Section */}
         <div className="flex flex-col items-center space-y-4">
@@ -167,16 +167,16 @@ export default function App() {
             href="https://www.linkedin.com/in/elliottchapman/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white"
+            className="tactile-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] active:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white"
           >
             <div className="flex items-center space-x-4">
-              <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 transition-colors">
-                <Linkedin className="w-6 h-6 text-gray-600 group-hover:text-[#00F5FF]" />
+              <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 group-active:bg-[#00F5FF]/10 transition-colors">
+                <Linkedin className="w-6 h-6 text-gray-600 group-hover:text-[#00F5FF] group-active:text-[#00F5FF]" />
               </div>
               <span className="font-medium text-lg">LinkedIn</span>
             </div>
-            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-[#00F5FF] transition-colors">
-              <svg className="w-4 h-4 text-gray-400 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-[#00F5FF] group-active:bg-[#00F5FF] transition-colors">
+              <svg className="w-4 h-4 text-gray-400 group-hover:text-white group-active:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </div>
@@ -187,16 +187,16 @@ export default function App() {
             data-cal-link="elliott-chapman/45min"
             data-cal-origin="https://cal.eu"
             data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-            className="tactile-btn relative overflow-hidden shimmer-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
+            className="tactile-btn relative overflow-hidden shimmer-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] active:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
           >
             <div className="flex items-center space-x-4">
-              <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 transition-colors">
-                <Calendar className="w-6 h-6 text-gray-600 group-hover:text-[#00F5FF]" />
+              <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 group-active:bg-[#00F5FF]/10 transition-colors">
+                <Calendar className="w-6 h-6 text-gray-600 group-hover:text-[#00F5FF] group-active:text-[#00F5FF]" />
               </div>
               <span className="font-medium text-lg">Book time with me</span>
             </div>
-            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-[#00F5FF] transition-colors">
-              <svg className="w-4 h-4 text-gray-400 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-[#00F5FF] group-active:bg-[#00F5FF] transition-colors">
+              <svg className="w-4 h-4 text-gray-400 group-hover:text-white group-active:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </div>
@@ -204,16 +204,16 @@ export default function App() {
 
           <button
             onClick={handleChatClick}
-            className="tactile-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
+            className="tactile-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] active:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
           >
             <div className="flex items-center space-x-4">
-              <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 transition-colors">
-                <MessageCircle className="w-6 h-6 text-gray-600 group-hover:text-[#00F5FF]" />
+              <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 group-active:bg-[#00F5FF]/10 transition-colors">
+                <MessageCircle className="w-6 h-6 text-gray-600 group-hover:text-[#00F5FF] group-active:text-[#00F5FF]" />
               </div>
               <span className="font-medium text-lg">Chat with me</span>
             </div>
-            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-[#00F5FF] transition-colors">
-              <svg className="w-4 h-4 text-gray-400 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-[#00F5FF] group-active:bg-[#00F5FF] transition-colors">
+              <svg className="w-4 h-4 text-gray-400 group-hover:text-white group-active:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </div>
