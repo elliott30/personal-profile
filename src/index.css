@@ -1,1 +1,44 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .shimmer-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(0, 245, 255, 0.3),
+      transparent
+    );
+    transform: skewX(-20deg);
+    animation: shimmer 5s infinite; /* Slowed down from 3s to 5s */
+    pointer-events: none;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    40% { /* Slowed down swipe duration */
+      left: 200%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+
+  /* Tactile button styles */
+  .tactile-btn {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+  }
+
+  .tactile-btn:active {
+    transform: scale(0.96);
+  }
+}

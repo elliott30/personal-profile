@@ -152,9 +152,12 @@ export default function App() {
         
         {/* Profile Section */}
         <div className="flex flex-col items-center space-y-4">
-          <div className="w-24 h-24 rounded-full bg-[#00F5FF] flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-            E
-          </div>
+          <img
+            src="https://3967898.fs1.hubspotusercontent-na1.net/hubfs/3967898/elliott.jpeg"
+            alt="Elliott Chapman"
+            referrerPolicy="no-referrer"
+            className="w-24 h-24 rounded-full object-cover border-4 border-[#00F5FF] shadow-lg"
+          />
           <h1 className="text-4xl font-bold tracking-tight">Elliott</h1>
         </div>
 
@@ -184,7 +187,7 @@ export default function App() {
             data-cal-link="elliott-chapman/45min"
             data-cal-origin="https://cal.eu"
             data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-            className="group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
+            className="tactile-btn relative overflow-hidden shimmer-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
           >
             <div className="flex items-center space-x-4">
               <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 transition-colors">
@@ -201,7 +204,7 @@ export default function App() {
 
           <button
             onClick={handleChatClick}
-            className="group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
+            className="tactile-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white text-left"
           >
             <div className="flex items-center space-x-4">
               <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 transition-colors">
