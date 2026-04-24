@@ -162,22 +162,24 @@ export default function Home() {
             </div>
           </a>
 
-          <Link
-            to="/solutions"
+          <a
+            href="https://elliott30.github.io/repos.html"
+            target="_blank"
+            rel="noopener noreferrer"
             className="tactile-btn group flex items-center justify-between w-full p-4 rounded-2xl border-2 border-gray-100 hover:border-[#00F5FF] active:border-[#00F5FF] hover:shadow-md transition-all duration-300 bg-white"
           >
             <div className="flex items-center space-x-4">
               <div className="p-2 rounded-full bg-gray-50 group-hover:bg-[#00F5FF]/10 group-active:bg-[#00F5FF]/10 transition-colors">
                 <FlaskConical className="w-6 h-6 text-gray-600 group-hover:text-[#00F5FF] group-active:text-[#00F5FF]" />
               </div>
-              <span className="font-medium text-lg">The Solution Lab</span>
+              <span className="font-medium text-lg">What I'm Working On</span>
             </div>
             <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 group-hover:bg-[#00F5FF] group-active:bg-[#00F5FF] transition-colors">
               <svg className="w-4 h-4 text-gray-400 group-hover:text-white group-active:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </div>
-          </Link>
+          </a>
 
           <button
             data-cal-namespace="45min"
