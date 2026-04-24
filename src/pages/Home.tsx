@@ -133,7 +133,7 @@ export default function Home() {
         {/* Profile Section */}
         <div className="flex flex-col items-center space-y-4">
           <img
-            src="https://3967898.fs1.hubspotusercontent-na1.net/hubfs/3967898/elliott.jpeg"
+            src={`https://${import.meta.env.VITE_HUBSPOT_PORTAL_ID}.fs1.hubspotusercontent-na1.net/hubfs/${import.meta.env.VITE_HUBSPOT_PORTAL_ID}/elliott.jpeg`}
             alt="Elliott Chapman"
             referrerPolicy="no-referrer"
             className="w-24 h-24 rounded-full object-cover border-4 border-[#00F5FF] shadow-lg"

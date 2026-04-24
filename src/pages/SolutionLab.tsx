@@ -91,7 +91,7 @@ export default function SolutionLab() {
         
         <div className="flex items-center space-x-3">
           <img
-            src="https://3967898.fs1.hubspotusercontent-na1.net/hubfs/3967898/elliott.jpeg"
+            src={`https://${import.meta.env.VITE_HUBSPOT_PORTAL_ID}.fs1.hubspotusercontent-na1.net/hubfs/${import.meta.env.VITE_HUBSPOT_PORTAL_ID}/elliott.jpeg`}
             alt="Elliott Chapman"
             referrerPolicy="no-referrer"
             className="w-8 h-8 rounded-full object-cover border-2 border-[#00F5FF]"
