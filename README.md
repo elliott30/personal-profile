@@ -1,6 +1,6 @@
 # Personal Profile
 
-A personal profile page built with Next.js.
+A personal profile page built with React and Vite.
 
 ## Run Locally
 
