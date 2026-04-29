@@ -220,6 +220,18 @@ export default function Home() {
         </div>
 
       </div>
+
+      <footer className="mt-8 pb-6 text-center">
+        <a
+          href="https://elliott30.github.io/legal.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-gray-400 hover:text-gray-500 transition-colors"
+        >
+          Privacy Policy &amp; Terms
+        </a>
+      </footer>
+
     </div>
   );
 }
